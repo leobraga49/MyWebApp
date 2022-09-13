@@ -3,49 +3,59 @@
 <head>
     <meta charset="UTF-8">
     <title>Manage Users</title>
-    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/5.2.0/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/5.2.0/css/bootstrap.css}"/>
+    <meta name="theme-color" content="#712cf9">
 </head>
-<body>
-<div class="container-fluid text-center">
-    <div><h2>Manage Users</h2></div>
-    <div class="m-2">
-        <a class="h3" th:href="@{/users/new}">Add New User</a>
-    </div>
 
-    <div th:if="${message}" class="alert alert-success text-center">
-        [[${message}]]
-    </div>
+<body class="d-flex h-100 text-center text-bg-dark vsc-initialized">
+<div class="card-img-overlay d-flex w-100 h-100 p-3 mx-auto flex-column text-white">
+    <div th:insert="~{header :: header}"></div>
+    <main class="px-3">
+        <div class="h3">Manage Users</div>
+        <div class="m-3">
+            <a class="h5" th:href="@{/users/new}">Add New User</a>
+        </div>
 
-    <div>
-        <table class="table table-bordered">
-           <thead class="table-dark">
-           <tr>
-           <th>ID</th>
-           <th>E-mail</th>
-           <th>First name</th>
-           <th>Last name</th>
-           <th>Enabled</th>
-           <th></th>
-           </tr>
-           </thead>
-            <tbody>
-            <th:block th:each="user : ${userList}">
+        <div th:if="${message}" class="alert alert-success text-center">
+            [[${message}]]
+        </div>
+
+        <div>
+            <table class="table table-bordered table-warning">
+                <thead class="table-dark">
                 <tr>
-                    <td>[[${{user.id}}]]</td>
-                    <td>[[${{user.email}}]]</td>
-                    <td>[[${{user.firstName}}]]</td>
-                    <td>[[${{user.lastName}}]]</td>
-                    <td>[[${{user.enabled}}]]</td>
-                    <td>
-                        <a class="h4 mr-3" th:href="@{'/users/edit/' + ${user.id}}">Edit</a>
-                        <a class="h4" th:href="@{'/users/delete/' + ${user.id}}">Delete</a>
-                    </td>
+                    <th>ID</th>
+                    <th>E-mail</th>
+                    <th>First name</th>
+                    <th>Last name</th>
+                    <th>Enabled</th>
+                    <th></th>
                 </tr>
+                </thead>
+                <tbody>
+                <th:block th:each="user : ${userList}">
+                    <tr>
+                        <td>[[${{user.id}}]]</td>
+                        <td>[[${{user.email}}]]</td>
+                        <td>[[${{user.firstName}}]]</td>
+                        <td>[[${{user.lastName}}]]</td>
+                        <td>[[${{user.enabled}}]]</td>
+                        <td>
+                            <a class="h5 me-3" th:href="@{'/users/edit/' + ${user.id}}">Edit</a>
+                            <a class="h5" th:href="@{'/users/delete/' + ${user.id}}">Delete</a>
+                        </td>
+                    </tr>
 
-            </th:block>
-            </tbody>
-        </table>
-    </div>
+                </th:block>
+                </tbody>
+            </table>
+        </div>
+    </main>
 </div>
+<script type="text/javascript">
+    function backToHomePage() {
+        window.location = "[[@{/}]]";
+    }
+</script>
 </body>
 </html>
